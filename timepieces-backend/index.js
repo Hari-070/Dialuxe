@@ -14,7 +14,8 @@ const app=express()
 app.use(express.json())
 app.use(cors())
 
-mongoose.connect('mongodb://localhost:27017/dialuxe')
+// mongoose.connect('mongodb://localhost:27017/dialuxe')//vqpGaSIaSxHANhTT
+mongoose.connect('mongodb+srv://hari:vqpGaSIaSxHANhTT@watches.tvbrwat.mongodb.net/?retryWrites=true&w=majority&appName=watches')
 .then(()=>{
     console.log("DB connected");
 })
