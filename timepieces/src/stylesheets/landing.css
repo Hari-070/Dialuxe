@@ -1,0 +1,134 @@
+.land_hero{
+    width: 100%;
+    height: 100vh;
+    background-image: url("../assets/landing3.png");
+    background-position: center;
+    background-size: cover;
+    padding-top: 100px;
+    /* background-color: #011638; */
+    background-color: black;
+    /* position: absolute; */
+    display: flex;justify-content: center;align-items: center;flex-direction: column;
+
+}
+.land_hero h1{
+    color: white;
+    font-size: 90px;
+    border:2px solid rgba(216, 52, 52, 0.489);
+    padding: 20px;
+}
+.land_hero h2{
+    color: white;
+    margin-top: 20px;
+    font-weight: 300;
+}
+.land_hero button{
+    border: 1px solid white;
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 30px;
+    font-size: 25px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+.land_hero button:hover{
+    background-color: white;
+    color: black;
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.521);
+}
+
+.head{
+    width: 100%;
+    /* margin-left: 15%; */
+    /* margin-right: 15%; */
+    padding-top: 20px;
+    /* background-color: #011638; */
+    background-color: black;
+    display: flex;
+    color: white;
+    justify-content: center;
+    /* position: absolute; */
+    z-index: 10;
+}
+
+.choose{
+    width: 100%;
+    height: 50vh;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.chooseLeft{
+    width: 30%;
+    border: 1px solid rgba(255, 255, 255, 0.493);
+    border-radius: 10px;
+    padding: 20px;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.285);
+}
+.maker{
+    width: 100%;
+    height: 150vh;
+    color: white;
+    display: flex;flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 50px;
+}
+.maker hr{
+    color: white;
+    box-shadow: 0 10px 20px rgb(255, 255, 255);width: 70%;
+}
+/* .maker button{
+    padding: 10px 20px;
+    color: white;
+    background-color: black;
+    border: 1px solid white;
+    font-size: 25px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+.maker button:hover{
+    background-color: white;
+    color: black;
+} */
+.testi{
+    display: flex;
+    width: 100%;
+    height: 70vh;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+    margin: 50px 0;
+}
+.testiLeft{
+    padding: 35px;
+    width: 35%;
+    height: 60vh;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.438);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.354);
+    display: flex;flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.landButton{
+    border: 1px solid white;
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 30px;
+    font-size: 25px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+.landButton:hover{
+    background-color: white;
+    color: black;
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.521);
+}
