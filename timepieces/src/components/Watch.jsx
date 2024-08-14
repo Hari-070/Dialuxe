@@ -1,16 +1,76 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from './Header'
 import { useSelector } from 'react-redux'
 import './product.css'
 import { times } from '../../products'
 import Footer from './Footer'
+import { useParams } from 'react-router-dom'
+import Loader from './Loader'
+import axios from 'axios'
 
 const Watch = () => {
-  const watch=useSelector((state)=>state.cart.watch)
-  const [img,setImg]=useState(watch.image)
-  console.log(watch)
+  const {productW}=useParams()
+  // console.log(productW)
+  const watches1=useSelector((state)=>state.cart.watches)
+  const [watches,setWatches]=useState(watches1)
+  const [watch,setWatch]=useState(null)
+  const [img,setImg]=useState(null)
+  const [loading,setLoading]=useState(true)
+  // console.log(loading)
+
+  useEffect(()=>{
+    const getP=async()=>{
+      try {
+        await axios.get("https://dialuxe.onrender.com/products/allProducts")
+        .then(res=>{
+          setWatches(res.data)
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getP()
+  //   console.log(watches)
+  //   const prod=watches.find((item)=>(
+  //     item.id===productW
+  //   ))
+  //   // console.log(prod);
+  //   console.log("hello in watch");
+  // if(prod){
+  // setWatch(prod)
+  // setImg(prod.image)
+  // setLoading(false)
+  // }
+  },[])
+
+  useEffect(()=>{
+    const prod=watches.find((item)=>(
+      item.id===productW
+    ))
+  console.log(prod);
+    console.log("hello in watch");
+  if(prod){
+  setWatch(prod)
+  setImg(prod.image)
+  setLoading(false)
+  }
+  },[watches])
+
+
+
+  
+  // if(watch==null){
+  //   return(
+  //     <Loader/>
+  //   )
+  // }
   return (
+    
     <div>
+      {loading?<div style={{display:'flex',height:"100vh",justifyContent:"center",alignItems:"center"}}>
+        <Loader/>
+        </div>
+      :<>
       <Header/>
       <div className='w_cont'>
         <div className='w_cont_img'>
@@ -52,7 +112,7 @@ const Watch = () => {
       <h1 style={{textAlign:"center",margin:"40px"}}>Our Latest Products</h1>
 
       <div className='watch_cont'>
-        {times.filter((item)=>(
+        {watches.filter((item)=>(
           watch.model===item.model?false:item
         )).map((item)=>(
            <div className='watch_card'>
@@ -72,7 +132,7 @@ const Watch = () => {
          </div>
         ))}
       </div>
-      <Footer/>
+      <Footer/></>}
     </div>
   )
 }

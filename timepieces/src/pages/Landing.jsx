@@ -3,6 +3,7 @@ import '../stylesheets/landing.css'
 import hero from '../assets/hero1.png'
 import { useNavigate } from 'react-router-dom'
 import Hero from '../components/Hero'
+import { FaArrowRight } from "react-icons/fa";
 import Footer from '../components/Footer'
 
 const Landing = () => {
@@ -19,7 +20,7 @@ const Landing = () => {
         {/* <img src='../src/assets/landing3.png' width="80%" /> */}
         <h1>The Ultimate Destination</h1>
         <h2>For Your Next Premium TimePiece</h2>
-        <button onClick={()=>navigate("/")} className='landButton'>Shop Now </button>
+        <button onClick={()=>navigate("/")} className='landButton'>Shop Now <FaArrowRight  /></button>
       </div>
 
       {/* <Hero/> */}
@@ -39,7 +40,7 @@ const Landing = () => {
         <img src='../src/assets/watch/img5.png' width="800px"/>
         <h2>We Provide The best Brands</h2>
         <p style={{textAlign:"center",marginLeft:"30%",marginRight:"30%"}}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus nisi neque fuga. Culpa quidem debitis commodi expedita deleniti obcaecati, alias dolor recusandae veritatis, consequuntur fugit quibusdam quod laborum repellat adipisci!Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt optio rerum quas dolorum impedit consequuntur veritatis, culpa architecto, cupiditate consectetur deserunt. Veniam impedit hic corporis animi, rem eaque temporibus eos.</p>
-        <button onClick={()=>navigate("/")} className='landButton'>Check Now </button>
+        <button onClick={()=>navigate("/")} className='landButton'>Check Now <FaArrowRight  /></button>
       </div>
       <div className='testi'>
         <div className='testiLeft'>
@@ -54,7 +55,7 @@ const Landing = () => {
         </div>
       </div>
       <div style={{width:"100%",display:"flex",justifyContent:"center"}}>
-      <button className='landButton' onClick={()=>navigate("/")}>Shop Now</button>
+      <button className='landButton' onClick={()=>navigate("/")}>Shop Now <FaArrowRight  /></button>
       </div>
       <Footer/>
     </div>

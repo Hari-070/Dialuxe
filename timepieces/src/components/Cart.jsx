@@ -5,21 +5,49 @@ import { decreament, increament } from '../redux/cartSlice'
 import './cart.css'
 import CartProduct from './CartProduct'
 import Footer from './Footer'
+import axios from 'axios'
+import toast from 'react-hot-toast'
+import Loader from './Loader'
 
 const Cart = () => {
 
-    const cart=useSelector((state)=>state.cart.cart)
+    const carts=useSelector((state)=>state.cart.cart)
+    const [cart,setCart]=useState(carts)
     const [totPrice,setTotPrice]=useState(0)
+    const [loading,setLoading]=useState(false)
     const delivery=10
     const dispatch=useDispatch()
 
+    
+
     useEffect(() => {
+        const getC=async()=>{
+          setLoading(true)
+          try {
+            await axios.get("https://dialuxe.onrender.com/cart/get",{
+              headers:{
+                Authorization:"Bearer "+localStorage.getItem("token")
+              }
+            })
+            .then(res=>{
+              setCart(res.data)
+              // dispatch(setCart(res.data))
+              setLoading(false)
+            })
+          } catch (error) {
+            console.log(error)
+            toast.error(error.response.data)
+            // setCart(carts)
+            setLoading(false)
+          }
+        }
+        getC();
         let total=0
-        cart.forEach((item)=>(
+        carts.forEach((item)=>(
           total+=(item.price*item.quantity)
         ))
         setTotPrice(total)
-      }, [cart])
+      }, [carts])
 
     
         return (
@@ -30,7 +58,8 @@ const Cart = () => {
   
         
           <div className='cart_part'>
-            {cart.map((item)=>(
+            {loading?<div style={{display:"flex",justifyContent:"center",alignItems:"center"}}><Loader/></div>:
+            cart.map((item)=>(
                 <CartProduct item={item}/>
             ))}
           </div>

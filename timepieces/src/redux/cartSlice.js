@@ -4,7 +4,8 @@ const cartSlice=createSlice({
     name:"cart",
     initialState:{
         cart:[],
-        watch:{}
+        watch:{},
+        watches:[]
     },
     reducers:{
         addCart:(state,action)=>{
@@ -12,6 +13,12 @@ const cartSlice=createSlice({
         },
         setWatch:(state,action)=>{
             state.watch=action.payload
+        },
+        setWatches:(state,action)=>{
+            state.watches=action.payload
+        },
+        setCart:(state,action)=>{
+            state.cart=action.payload
         },
         increament:(state,action)=>{
             state.cart=state.cart.map((item)=>(
@@ -38,5 +45,5 @@ const cartSlice=createSlice({
     }
 })
 
-export const {addCart,setWatch,increament,decreament,remove}=cartSlice.actions
+export const {addCart,setWatch,increament,decreament,remove,setWatches,setCart}=cartSlice.actions
 export default cartSlice.reducer

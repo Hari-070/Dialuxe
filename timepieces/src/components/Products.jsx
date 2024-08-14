@@ -1,41 +1,80 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {times} from '../../products.js'
 import './product.css'
 import {types} from '../../products1.js'
 import { useDispatch, useSelector } from 'react-redux'
-import { addCart, increament, setWatch } from '../redux/cartSlice.js'
+import { addCart, increament, setWatch, setWatches } from '../redux/cartSlice.js'
 import { useNavigate } from 'react-router-dom'
 import {message} from 'antd'
 import Login from '../pages/Login.jsx'
 import Signup from '../pages/Signup.jsx'
+import axios from 'axios'
+import Loader from './Loader.jsx'
+import toast from 'react-hot-toast'
 
 const Products = (props) => {
   const navigate=useNavigate()
-  const [watches,setWatches]=useState(times)
+  const watches=useSelector((state)=>state.cart.watches)
+
   const [search,setSearch]=useState('')
-  const [genre,setGenre]=useState('')
-  console.log(genre)
+  const [type,setType]=useState('')
+  const [loading,setLoading]=useState(false)
+  // console.log(genre)
   const cart=useSelector((state)=>state.cart.cart)
   console.log(cart)
 
   const dispatch=useDispatch()
 
-  const handleCart=(item)=>{
-    if(cart.find((items)=>items.id===item.id)){
-      dispatch(increament(item))
-      message.success("added to cart")
+  const handleCart=async(item)=>{
+    try {
+      await axios.post('https://dialuxe.onrender.com/cart/addtocart',{product_id:item.id,quantity:1},{headers:{
+        Authorization:"Bearer "+localStorage.getItem("token")
+      }})
+      .then(res=>{
+        toast.success("added to cart")
+      //   if(cart.find((items)=>items.id===item.id)){
+      //     dispatch(increament(item))
+      //     toast.success("added to cart")
+      //   }
+      //   else{
+      //     dispatch(addCart(item))
+      //     toast.success("added to cart")
+      // }
+        
+       })
+    } catch (error) {
+      console.log(error)
+      toast.error(error.response.data)
+        if(cart.find((items)=>items.id===item.id)){
+          dispatch(increament(item))
+          toast.success("added to cart")
+        }
+        else{
+          dispatch(addCart(item))
+          toast.success("added to cart")
+      }
     }
-    else{
-      dispatch(addCart(item))
-      message.success("added to cart")
-
-  }}
+    }
 
   const handleBuy=(item)=>{
-    dispatch(setWatch(item))
+    // dispatch(setWatch(item))
     navigate("/watch/"+item.id)
   }
- 
+
+  
+  useEffect(()=>{
+    const getP=async()=>{
+      setLoading(true)
+      await axios.get("https://dialuxe.onrender.com/products/allProducts")
+      .then(res=>{
+        // setWatches(res.data)
+        dispatch(setWatches(res.data))
+        setLoading(false)
+      })
+    }
+    getP()
+  },[])
+
   return (
     <>
     <h1 style={{textAlign:"center",margin:"40px 0 10px 0"}}>Our Latest Collection</h1>
@@ -46,16 +85,16 @@ const Products = (props) => {
     <div className='search_cont'>
       <h3>Search :</h3>
       <input type='text' placeholder='Search' value={search} onChange={(e)=>setSearch(e.target.value)}/>
-      <select value={genre} onChange={(e)=>setGenre(e.target.value)}>
-        <option value="">Categories</option>
+      <select value={type} onChange={(e)=>setType(e.target.value)}>
+        <option value="">All</option>
         {types.map((item)=>(
             <option value={item.type}>{item.type}</option>
         ))}
       </select>
     </div>
       <div className='watch_cont'>
-        {watches.filter((item)=>(
-          genre===''?item:item.type.toLowerCase().includes(genre.toLowerCase())
+        { loading?<Loader/>:watches.filter((item)=>(
+          type===''?item:item.type.toLowerCase()===type.toLowerCase()
         )).filter((item)=>(
           search===''?item:item.brand.toLowerCase().includes(search.toLowerCase())
         )).map((item)=>(

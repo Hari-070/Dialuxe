@@ -2,6 +2,8 @@ import React,{useState} from 'react'
 import {useDispatch,useSelector} from 'react-redux'
 import {  decreament, increament, remove } from '../redux/cartSlice'
 import './cart.css'
+import axios from 'axios'
+import toast from 'react-hot-toast'
 
 const CartProduct = (props) => {
     const item=props.item
@@ -9,14 +11,32 @@ const CartProduct = (props) => {
     const carts=useSelector((state)=>state.cart.cart)
     console.log(carts)
 
-    const handleInc=(item)=>{
+    const handleInc=async(item)=>{
+      try {
+        await axios.post("https://dialuxe.onrender.com/cart/addtocart",{product_id:item.id,quantity:item.quantity+1},{
+          headers:{Authorization:"Bearer "+localStorage.getItem("token") }
+        })
+      } catch (error) {
+        console.log(error)
+        toast.error("pu")
         dispatch(increament(item))
+        
+      }
     }
-    const handleMin=(item)=>{
+    const handleMin=async(item)=>{
+      try {
+        await axios.post("https://dialuxe.onrender.com/cart/addtocart",{product_id:item.id,quantity:item.quantity-1},{
+          headers:{Authorization:"Bearer "+localStorage.getItem("token") }
+        })
+      } catch (error) {
+        console.log(error)
         dispatch(decreament(item))
         
+      }
+        
     }
-    const handleRemove=()=>{
+    const handleRemove=async()=>{
+      
         dispatch(remove(item))
     }
   return (
