@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react'
 import Header from './Header'
 import { useDispatch, useSelector } from 'react-redux'
-import { decreament, increament } from '../redux/cartSlice'
+import { decreament, increament, setCart } from '../redux/cartSlice'
 import './cart.css'
 import CartProduct from './CartProduct'
 import Footer from './Footer'
@@ -11,18 +11,46 @@ import Loader from './Loader'
 
 const Cart = () => {
 
-    const carts=useSelector((state)=>state.cart.cart)
-    const [cart,setCart]=useState(carts)
+    const cart=useSelector((state)=>state.cart.cart)
+    // const [cart,setCart]=useState(carts)
     const [totPrice,setTotPrice]=useState(0)
     const [loading,setLoading]=useState(false)
     const delivery=10
     const dispatch=useDispatch()
 
     
-
+  useEffect(()=>{
+    const getC=async()=>{
+      setLoading(true)
+      try {
+        const res=await axios.get("https://dialuxe.onrender.com/cart/get",{
+          headers:{
+            Authorization:"Bearer "+localStorage.getItem("token")
+          }
+        }).then(()=>{
+          console.log(res.data);
+          dispatch(setCart(res.data))
+          setLoading(false)
+        })
+        
+        
+        // .then(res=>{
+        //   // setCart(res.data)
+        //   dispatch(setCart(res.data))
+        //   setLoading(false)
+        // })
+      } catch (error) {
+        console.log(error)
+        // toast.error(error.response.data)
+        // setCart(carts)
+        setLoading(false)
+      }
+    }
+    getC();
+  },[])
     useEffect(() => {
         const getC=async()=>{
-          setLoading(true)
+          // setLoading(true)
           try {
             await axios.get("https://dialuxe.onrender.com/cart/get",{
               headers:{
@@ -30,24 +58,24 @@ const Cart = () => {
               }
             })
             .then(res=>{
-              setCart(res.data)
-              // dispatch(setCart(res.data))
+              // setCart(res.data)
+              dispatch(setCart(res.data))
               setLoading(false)
             })
           } catch (error) {
             console.log(error)
-            toast.error(error.response.data)
+            // toast.error(error.response.data)
             // setCart(carts)
-            setLoading(false)
+            // setLoading(false)
           }
         }
         getC();
         let total=0
-        carts.forEach((item)=>(
+        cart.forEach((item)=>(
           total+=(item.price*item.quantity)
         ))
         setTotPrice(total)
-      }, [carts])
+      }, [cart])
 
     
         return (

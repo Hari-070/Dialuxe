@@ -141,14 +141,16 @@
 }
 .w_cont_buy button{
     padding: 15px 30px;
-    border: 1px solid rgba(0, 0, 255, 0.543);
+    border: 1px solid black;
     color: white;
-    /* background-color: rgba(0, 0, 255, 0.724); */background-color: #307351;
+    /* background-color: rgba(0, 0, 255, 0.724); */background-color: black;
     font-size: 17px;
     cursor: pointer;
+    margin-right: 20px;
 }
 .w_cont_buy button:hover{
-    background-color: rgba(0, 0, 255, 0.543);
+    background-color: white;
+    color: black;
 }
 .w_cont_buy button:active{
     background-color: white;

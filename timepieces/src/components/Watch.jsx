@@ -84,6 +84,7 @@ const Watch = () => {
           <h3>category: <span style={{color:"grey"}}>{watch.type}</span></h3>
           <h1 style={{marginTop:"30px"}}>${watch.price-watch.price*0.1} <span style={{fontSize:"18px"}}>(-10%off)</span> <span style={{fontSize:"15px"}}>MRP: <s style={{color:"red"}}>${watch.price}</s></span></h1>
           <div className='w_cont_buy'>
+            <button>Add to cart</button>
             <button>Buy Now</button>
           </div>
           <div style={{display:"flex",width:"100%"}}>

@@ -18,8 +18,8 @@ const CartProduct = (props) => {
         })
       } catch (error) {
         console.log(error)
-        toast.error("pu")
         dispatch(increament(item))
+        toast.error("denied")
         
       }
     }
@@ -35,9 +35,20 @@ const CartProduct = (props) => {
       }
         
     }
-    const handleRemove=async()=>{
-      
+    const handleRemove=async(item)=>{
+      try {
+        await axios.post('https://dialuxe.onrender.com/cart/delete',{product_id:item.id},
+          {
+            headers:{
+              Authorization:"Bearer "+localStorage.getItem("token")
+            }
+          }
+        )
+      } catch (error) {
+        console.log(error);
+        
         dispatch(remove(item))
+      }
     }
   return (
     <>
@@ -53,7 +64,7 @@ const CartProduct = (props) => {
                           <button onClick={()=>handleMin(item)} className='inc'>-</button>
                           <p>{item.quantity}</p>
                           <button onClick={()=>handleInc(item)} className='inc'>+</button>
-                          <button onClick={handleRemove} className='del'>delete</button>
+                          <button onClick={()=>handleRemove(item)} className='del'>delete</button>
                         </div>
                       <h3>${item.quantity*item.price}</h3>
                       </div>
