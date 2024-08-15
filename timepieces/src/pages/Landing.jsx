@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import Hero from '../components/Hero'
 import { FaArrowRight } from "react-icons/fa";
 import Footer from '../components/Footer'
+import img1 from '../assets/logo.png'
 
 const Landing = () => {
   const navigate=useNavigate()
@@ -12,7 +13,7 @@ const Landing = () => {
     <div style={{backgroundColor:"black"}}>
       <div className='head'>
         {/* <h2>Home</h2> */}
-        <img src='../src/assets/logo.png' width="200px"/>
+        <img src={img1} width="200px"/>
         {/* <h2>Login</h2> */}
       </div>
 
@@ -31,7 +32,7 @@ const Landing = () => {
           <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus nisi neque fuga. Culpa quidem debitis commodi expedita deleniti obcaecati, alias dolor recusandae veritatis, consequuntur fugit quibusdam quod laborum repellat adipisci!</p>
           <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt optio rerum quas dolorum impedit consequuntur veritatis, culpa architecto, cupiditate consectetur deserunt. Veniam impedit hic corporis animi, rem eaque temporibus eos.</p>
         </div>
-        <img src='../src/assets/landing1.png' width="700px" height="100%"/>
+        <img src='../assets/landing1.png' width="700px" height="100%"/>
       </div>
 
       <div className='maker'>
