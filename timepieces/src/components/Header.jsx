@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { HiShoppingCart } from "react-icons/hi2";
 import { CgProfile } from "react-icons/cg";
 import { useNavigate } from 'react-router-dom'
+import logo from '../assets/logo.png'
 
 const Header = (props) => {
   const navigate=useNavigate()
@@ -20,7 +21,7 @@ const Header = (props) => {
     <>
       <div className='header_cont'>
         <div onClick={()=>navigate("/")} style={{cursor:"pointer"}}>
-            <img src='../src/assets/logo.png' style={{marginLeft:"20px"}} width="200px"/>
+            <img src={logo} style={{marginLeft:"20px"}} width="200px"/>
         </div>
         <div className='header_2'>
             <h3 onClick={()=>navigate("/home")} >Products</h3>

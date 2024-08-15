@@ -11,6 +11,7 @@ import Signup from '../pages/Signup.jsx'
 import axios from 'axios'
 import Loader from './Loader.jsx'
 import toast from 'react-hot-toast'
+import cato from '../assets/cato.png'
 
 const Products = (props) => {
   const navigate=useNavigate()
@@ -80,7 +81,7 @@ const Products = (props) => {
     <h1 style={{textAlign:"center",margin:"40px 0 10px 0"}}>Our Latest Collection</h1>
     <h1 style={{textAlign:"center",margin:"15px"}}>In</h1>
     <div style={{width:"100%",display:"flex",justifyContent:"center",marginBottom:"40px"}}>
-    <img src='../src/assets/cato.png' alt='logo' width="300px"/>
+    <img src={cato} alt='logo' width="300px"/>
     </div>
     <div className='search_cont'>
       <h3>Search :</h3>
