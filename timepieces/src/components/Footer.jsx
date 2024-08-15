@@ -4,13 +4,14 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
+import logo from '../assets/logo.png'
 
 
 const Footer = () => {
   return (
     <div className='footer_main'>
       <div className='footer_left'>
-        <img src='../src/assets/logo.png' width="200px"/>
+        <img src={logo} width="200px"/>
         <div>
             <input type='text' placeholder='email'/>
             <button>Subscribe</button>
